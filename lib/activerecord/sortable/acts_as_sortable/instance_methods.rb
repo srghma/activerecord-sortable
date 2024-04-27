@@ -2,6 +2,10 @@ module ActiveRecord
   module Sortable
     module ActsAsSortable
       module InstanceMethods
+        def escaped_sortable_position_column
+          @@escaped_sortable_position_column ||= ActiveRecord::Base.connection.quote_column_name(sortable_position_column)
+        end
+
         def move_to!(new_position)
           new_position = Integer(new_position)
 
